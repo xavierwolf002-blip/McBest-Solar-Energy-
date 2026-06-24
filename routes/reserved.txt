@@ -1,0 +1,52 @@
+// Route::get("emma", function () {
+//     return view("login");
+// });
+
+//VIEW ROUTES
+// Route::view("home", "welcome");
+
+//ROUTE TO HOMEPAGE
+// Route::get('/', function () {
+//     return view('welcome');
+//     //return redirect("/register");
+// });
+
+// Route::post("register", function () {
+//     return "Registration form submitted!";
+// })->name('register.post');
+
+Route::get("register", function () {
+//     return view("register");
+// })->name('register');
+
+// //FUNCTION ROUTES
+// Route::get("emma", function () {
+//     return view("login");
+// });
+
+@if(5)
+<h1>hello</h1>
+@endif
+
+@for()
+
+@endfor
+
+@while()
+@endwhile
+
+@forelse()
+@endforelse
+
+
+<h1>Hello</h1>
+@foreach ($students as $student)
+<h1>{{$student}}</h1>
+@endforeach
+
+
+@for($i=2; $i<=40; $i+=2)
+<h1>{{$i}}</h1>
+@endfor
+
+  @vite('resources/css/index.css')

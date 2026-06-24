@@ -1,0 +1,381 @@
+/**
+ * McBest Solar - Main Stylesheet
+ * 
+ * This file imports Tailwind CSS and defines custom styles for the application.
+ * All original CSS has been converted to Tailwind utility classes where possible.
+ * 
+ * @see tailwind.config.js for custom theme configuration
+ */
+
+/* Import Tailwind CSS */
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
+
+/* Import Font Awesome */
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
+@theme {
+    --font-sans: 'Outfit', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+@layer base {
+    html, body, p, span, div, a, li, button, input, textarea {
+        font-family: 'Outfit', sans-serif !important;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Outfit', sans-serif !important;
+        letter-spacing: -0.04em;
+        font-weight: 700;
+    }
+}
+
+/**
+ * Custom Animations
+ * 
+ * These animations are used throughout the site for smooth transitions
+ * and engaging user interactions.
+ */
+
+@keyframes pulse-slow {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes bounce-slow {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-right {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/**
+ * Custom Utility Classes
+ * 
+ * Additional utility classes not provided by Tailwind by default.
+ */
+
+/* Smooth scrolling for the entire page */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Skip to content link for accessibility */
+.skip-link {
+    @apply absolute -top-10 left-0 bg-primary text-white px-4 py-2 z-[10001];
+    @apply focus:top-0 transition-all;
+}
+
+/* Focus indicators for accessibility */
+:focus {
+    @apply outline-2 outline-primary outline-offset-2;
+}
+
+/* Remove focus outline for mouse users, keep for keyboard users */
+:focus:not(:focus-visible) {
+    @apply outline-none;
+}
+
+:focus-visible {
+    @apply outline-2 outline-primary outline-offset-2;
+}
+
+/**
+ * Toast Notification Styles
+ * 
+ * Custom styles for toast notifications that appear in the top-right corner.
+ */
+
+.toast {
+    @apply fixed top-5 right-5 px-6 py-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg;
+    @apply z-[10000] flex items-center gap-3 transform translate-x-[400px];
+    @apply transition-transform duration-300 max-w-sm;
+}
+
+.toast.show {
+    @apply translate-x-0;
+}
+
+.toast.success {
+    @apply border-l-4 border-success;
+}
+
+.toast.error {
+    @apply border-l-4 border-error;
+}
+
+.toast.warning {
+    @apply border-l-4 border-warning;
+}
+
+/**
+ * Loading Spinner
+ * 
+ * Used in forms and buttons during async operations.
+ */
+
+.spinner {
+    @apply inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/**
+ * Hero Section Background
+ * 
+ * The hero section uses a background image with overlay.
+ * This ensures the image loads properly and maintains aspect ratio.
+ */
+
+.hero-bg {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
+                      url('https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80');
+    @apply bg-cover bg-center bg-no-repeat;
+}
+
+/**
+ * Portfolio Overlay Effect
+ * 
+ * Smooth overlay that appears on hover over portfolio items.
+ */
+
+.portfolio-overlay {
+    @apply absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent;
+    @apply text-white p-5 transform translate-y-full transition-transform duration-300;
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    @apply translate-y-0;
+}
+
+.portfolio-item:hover img {
+    @apply scale-105 transition-transform duration-300;
+}
+
+/**
+ * FAQ Accordion Styles
+ * 
+ * Smooth accordion animation for FAQ items.
+ */
+
+.faq-answer {
+    @apply px-6 max-h-0 overflow-hidden transition-all duration-300;
+}
+
+.faq-item.active .faq-answer {
+    @apply py-6 max-h-[500px];
+}
+
+.faq-item.active .faq-question i {
+    @apply rotate-180 transition-transform duration-300;
+}
+
+/**
+ * Mobile Menu Styles
+ * 
+ * Hamburger menu animation and mobile navigation.
+ */
+
+.hamburger {
+    @apply block w-6 h-0.5 bg-gray-800 dark:bg-gray-200 relative transition-all;
+}
+
+.hamburger::before,
+.hamburger::after {
+    @apply content-[''] absolute w-6 h-0.5 bg-gray-800 dark:bg-gray-200 left-0 transition-all;
+}
+
+.hamburger::before {
+    @apply -top-2;
+}
+
+.hamburger::after {
+    @apply top-2;
+}
+
+.mobile-toggle.active .hamburger {
+    @apply bg-transparent;
+}
+
+.mobile-toggle.active .hamburger::before {
+    @apply rotate-45 top-0;
+}
+
+.mobile-toggle.active .hamburger::after {
+    @apply -rotate-45 top-0;
+}
+
+/**
+ * Back to Top Button
+ * 
+ * Smooth fade-in animation for the back-to-top button.
+ */
+
+.back-to-top {
+    @apply opacity-0 invisible transition-all duration-300;
+}
+
+.back-to-top.show {
+    @apply opacity-100 visible;
+}
+
+/**
+ * Form Validation Styles
+ * 
+ * Visual feedback for form validation errors.
+ */
+
+.form-input.error {
+    @apply border-error focus:border-error focus:ring-error;
+}
+
+.error-message {
+    @apply text-error text-sm mt-1 hidden;
+}
+
+.error-message.show {
+    @apply block;
+}
+
+/**
+ * Dark Mode Transitions
+ * 
+ * Smooth transitions when toggling dark mode.
+ */
+
+* {
+    @apply transition-colors duration-200;
+}
+
+/**
+ * Print Styles
+ * 
+ * Optimize layout for printing.
+ */
+
+@media print {
+    .navbar,
+    .footer,
+    .emergency-button,
+    .back-to-top,
+    .toast {
+        @apply hidden;
+    }
+    
+    body {
+        @apply text-black bg-white;
+    }
+}
+
+/**
+ * Accessibility Improvements
+ * 
+ * Ensure content is accessible to screen readers and keyboard users.
+ */
+
+.sr-only {
+    @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+    clip: rect(0, 0, 0, 0);
+}
+
+/* Ensure sufficient color contrast in dark mode */
+.dark {
+    color-scheme: dark;
+}
+
+/**
+ * Livewire Loading States
+ * 
+ * Show loading indicator when Livewire is processing.
+ */
+
+[wire\:loading] {
+    @apply opacity-50 pointer-events-none;
+}
+
+[wire\:loading\.remove] {
+    @apply hidden;
+}
+
+/**
+ * Custom Scrollbar (Webkit browsers)
+ * 
+ * Styled scrollbar that matches the brand colors.
+ */
+
+::-webkit-scrollbar {
+    @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-primary rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-dark;
+}
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Figtree', ui-sans-serif, system-ui, sans-serif;
+    --font-heading: 'Figtree', ui-sans-serif, system-ui, sans-serif;
+    --color-primary: #27ae60;
+    --color-primary-dark: #219653;
+    --color-primary-light: #6fbf73;
+    --color-secondary: #2d9cdb;
+    --color-secondary-dark: #2980b9;
+    --color-secondary-light: #5dade2;
+    --color-success: #27ae60;
+    --color-error: #e74c3c;
+    --color-warning: #f39c12;
+    --color-whatsapp: #25D366;
+    --shadow-card: 0 5px 15px rgba(0, 0, 0, 0.05);
+    --shadow-card-hover: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --shadow-dark-card: 0 5px 15px rgba(0, 0, 0, 0.2);
+    --shadow-dark-card-hover: 0 10px 25px rgba(0, 0, 0, 0.3);
+    --animate-slide-in: slideIn 0.3s ease-out;
+    @keyframes slideIn {
+        0% { transform: translateX(400px); opacity: 0; }
+        100% { transform: translateX(0); opacity: 1; }
+    }
+}

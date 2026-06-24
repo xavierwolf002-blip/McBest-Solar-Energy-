@@ -1,0 +1,24 @@
+body {
+    background-color: blue;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.header-list {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    background-color: green;
+}
+
+.header-list-item {
+    list-style-type: none;
+}
+
+.header-list-item a {
+    text-decoration: none;
+    color: white;
+}    
+.header-list-item a:hover {
+   background-color: rgb(255, 100, 0);
+}    
+
